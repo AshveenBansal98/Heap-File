@@ -83,7 +83,7 @@ void DiskFile :: appendPages(Page new_data){
     Node* new_node = new Node();
     new_node->data  = new_data;
     new_node->next = NULL;
-
+    new_node->prv = NULL;
     if (nodePointer == NULL)
     {
        nodePointer = new_node;
@@ -144,7 +144,7 @@ bool DiskFile :: insertRecord(int rec_id, int rec_length){
             }
         }
     /* Case-3: When no empty slot is available and if existing Page can accommodate the data at the end */
-        if (last->data.spaceLeft - (rec_length + DIR_ENTRY_LENGTH) > 0){
+        if (last->data.spaceLeft - (rec_length + DIR_ENTRY_LENGTH) >= 0){
             int next_start_idx = last->data.arr.back().start + last->data.arr.back().length;
             last->data.arr.push_back(DirectoryEntry(rec_id, rec_length, next_start_idx, true));
             last->data.spaceLeft = last->data.spaceLeft - (rec_length + DIR_ENTRY_LENGTH);
