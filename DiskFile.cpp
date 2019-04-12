@@ -83,7 +83,7 @@ void DiskFile :: appendPages(Page new_data){
     Node* new_node = new Node();
     new_node->data  = new_data;
     new_node->next = NULL;
-    new_node->prv = NULL;
+    new_node->prev = NULL;
     if (nodePointer == NULL)
     {
        nodePointer = new_node;
